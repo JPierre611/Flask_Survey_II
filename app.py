@@ -17,3 +17,7 @@ def start_page():
 	   the instructions, and a button to start thr survey."""
 	return render_template('start_page.html', satisfaction=satisfaction_survey)
 
+@app.route('/questions/<question>')
+def handle_question(question):
+	"""Show a form asking the question and listing the choices as radio buttons."""
+	return render_template('show_question_page.html', question=int(question), satisfaction=satisfaction_survey)
