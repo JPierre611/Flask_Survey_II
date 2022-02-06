@@ -10,5 +10,6 @@
     <label for="{{ choice }}">{{ choice }}</label>
   </div>
   {% endfor %}
+  <input type="hidden" name="question" value="{{ question }}">
   <button class="choice">Select</button>
 {% endblock %}
