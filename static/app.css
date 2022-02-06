@@ -1,3 +1,10 @@
 .choice {
   margin: .4rem;
 }
+
+.messages p {
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 0, 0, 0.1);
+}
