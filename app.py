@@ -20,9 +20,13 @@ def start_page():
 @app.route('/questions/<question>')
 def handle_question(question):
 	"""Show a form asking the question and listing the choices as radio buttons."""
-	return render_template('show_question_page.html', question=int(question), satisfaction=satisfaction_survey)
+	if len(responses) < len(satisfaction_survey.questions):
+		if int(question) == len(responses):
+			return render_template('show_question_page.html', question=int(question), satisfaction=satisfaction_survey)
+		return redirect(f'/questions/{len(responses)}')
+	return render_template('/thankyou.html', satisfaction=satisfaction_survey)
 
-@app.route('/answer')
+@app.route('/answer', methods=['POST'])
 def handle_answer():
 	"""Append the answer to the responses list and redirect the user to the next question.
 	   If the answer is to the last question, redirect them to a simple 'Thank You' page"""
@@ -30,7 +34,7 @@ def handle_answer():
 	responses.append(answer)
 	question = int(request.form['question']) + 1
 	if question < len(satisfaction_survey.questions):
-		return redirect(f'questions/{question}')
-	return render_template('/thankyou.html')
+		return redirect(f'/questions/{question}')
+	return render_template('/thankyou.html', satisfaction=satisfaction_survey)
 
 	
